@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html, body {
+      margin: 0
+    }
+    body {
+      height: 100vh;
+      width: 100vw;
+    }
+    .test {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 600px;
+      overflow: auto;
+    }
+    .inner {
+      height: 2000px;
+      background-color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="test">
+    <div class="inner"></div>
+  </div>
+  <button id="btn">Toggle</button>
+  <button id="change">Change Color</button>
+
+  <script>
+    const btn = document.querySelector('#btn')
+    const changeBtn = document.querySelector('#change')
+    const modal = document.querySelector('.test')
+    const inner = document.querySelector('.inner')
+    let show = false
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation()
+      modal.style.display = modal.style.display  === 'none' ? 'block' : 'none'
+    })
+    changeBtn.addEventListener('click', (e) => {
+      e.stopPropagation()
+      inner.style.backgroundColor = inner.style.backgroundColor == 'black' ? 'white' : 'black'
+    })
+    document.addEventListener('click', (e) => {
+      if(!modal.contains(e.target)){
+        modal.style.display = 'none'
+      }
+    })
+  </script>
+</body>
+</html>
