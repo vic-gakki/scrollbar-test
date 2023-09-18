@@ -13,54 +13,75 @@
       width: 100vw;
     }
     .test {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       width: 80%;
-      height: 600px;
+      height: 200px;
       overflow: auto;
-      --bar-color: initial
+      --bar-color: red
     }
     .test::-webkit-scrollbar {
-      width: initial;
+      width: unset;
     }
     .test::-webkit-scrollbar-thumb {
       background: var(--bar-color)
+    }
+    .normal {
+      width: 80%;
+      height: 200px;
+      overflow: auto;
+      margin-top: 36px;
     }
     .inner {
       height: 2000px;
       background-color: #000;
     }
+    .text {
+      height: 200px;
+      text-align: center;
+      color: red;
+    }
   </style>
 </head>
 <body>
-  <div class="test">
-    <div class="inner"></div>
+  <div>
+    <button id="btn">Toggle</button>
+    <button id="change">Change Color</button>
+    <button id="changeBarColor">Change Bar Color</button>
+    <input type="text" id="color">
   </div>
-  <button id="btn">Toggle</button>
-  <button id="change">Change Color</button>
-  <button id="changeBarColor">Change Bar Color</button>
-  <input type="text" id="color">
+  <div class="test">
+    <div class="inner">
+      <div class="text">line 1</div>
+      <div class="text">line 1</div>
+      <div class="text">line 1</div>
+      <div class="text">line 1</div>
+      <div class="text">line 1</div>
+      <div class="text">line 1</div>
+    </div>
+  </div>
+  <div class="normal">
+    <div class="inner">
+      <div class="text">line 1</div>
+      <div class="text">line 1</div>
+      <div class="text">line 1</div>
+      <div class="text">line 1</div>
+      <div class="text">line 1</div>
+      <div class="text">line 1</div>
+    </div>
+  </div>
   <script>
-    const btn = document.querySelector('#btn')
     const changeBtn = document.querySelector('#change')
     const changeBarColor = document.querySelector('#changeBarColor')
     const modal = document.querySelector('.test')
-    const inner = document.querySelector('.inner')
+    const inner = document.querySelectorAll('.inner')
     const color = document.querySelector('#color')
     
-    let show = false
-    btn.addEventListener('click', (e) => {
+    color.addEventListener('click', (e) => {
       e.stopPropagation()
-      modal.style.display = modal.style.display  === 'none' ? 'block' : 'none'
     })
+
     changeBtn.addEventListener('click', (e) => {
       e.stopPropagation()
-      if(!color.value){
-        return
-      }
-      inner.style.backgroundColor = inner.style.backgroundColor == 'black' ? 'white' : 'black'
+      inner.forEach(i => i.style.backgroundColor = i.style.backgroundColor == 'black' ? 'white' : 'black')
     })
     changeBarColor.addEventListener('click', (e) => {
       e.stopPropagation()
@@ -68,11 +89,6 @@
         return
       }
       modal.style.setProperty("--bar-color", color.value);
-    })
-    document.addEventListener('click', (e) => {
-      if(!modal.contains(e.target)){
-        modal.style.display = 'none'
-      }
     })
   </script>
 </body>
