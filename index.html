@@ -19,16 +19,7 @@
       border: 1px solid cyan;
       background-color: #000;
     }
-/*     .test::-webkit-scrollbar {
-      width: 3px;
-    }
-    .test::-webkit-scrollbar-thumb {
-      background: var(--bar-color)
-    }
-     .test::-webkit-scrollbar-track {
-      background: #000;
-    } */
-    
+   
     .normal {
       width: 80%;
       height: 200px;
@@ -39,7 +30,6 @@
     }
     .inner {
       height: 2000px;
-/*       background-color: #000; */
     }
     .text {
       height: 200px;
@@ -49,15 +39,9 @@
   </style>
 </head>
 <body>
-  <div>
-    <button id="btn">Toggle</button>
-    <button id="change">Change Color</button>
-    <button id="changeBarColor">Change Bar Color</button>
-    <input type="text" id="color">
-  </div>
   <div class="test">
     <div class="inner">
-      <div class="text">line 1 line 1 line 1 line 1 line 1 line 1 line 1 line 1 line 1 line 1 line 1 line 1 line 1 line 1 line 1 line 1 line 1 line 1 line 1 line 1</div>
+      <div class="text">line 1</div>
       <div class="text">line 1</div>
       <div class="text">line 1</div>
       <div class="text">line 1</div>
@@ -76,27 +60,12 @@
     </div>
   </div>
   <script>
-    const changeBtn = document.querySelector('#change')
-    const changeBarColor = document.querySelector('#changeBarColor')
-    const modal = document.querySelector('.test')
-    const inner = document.querySelectorAll('.inner')
-    const color = document.querySelector('#color')
-    
-    color.addEventListener('click', (e) => {
-      e.stopPropagation()
-    })
-
-    changeBtn.addEventListener('click', (e) => {
-      e.stopPropagation()
-      inner.forEach(i => i.style.backgroundColor = i.style.backgroundColor == 'black' ? 'white' : 'black')
-    })
-    changeBarColor.addEventListener('click', (e) => {
-      e.stopPropagation()
-      if(!color.value){
-        return
-      }
-      modal.style.setProperty("--bar-color", color.value);
-    })
+   window.addEventListener('load', () => {
+    const testEle = document.querySelector('.test')
+    if(testEle.scrollHeight > testEle.offsetHeight){
+      testEle.classList.add('has-scroll')
+    }
+   })
   </script>
 </body>
 </html>
