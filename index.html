@@ -59,13 +59,13 @@
       <div class="text">line 1</div>
     </div>
   </div>
+  <div >
+    <h6>INFO</h6>
+    <p class="info"></p>
+  </div>
   <script>
-   window.addEventListener('load', () => {
-    const testEle = document.querySelector('.test')
-    if(testEle.scrollHeight > testEle.offsetHeight){
-      testEle.classList.add('has-scroll')
-    }
-   })
+   const info = document.querySelector('.info')
+   info.textContent = navigator.userAgent
   </script>
 </body>
 </html>
