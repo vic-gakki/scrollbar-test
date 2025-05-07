@@ -1,81 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    html, body {
-      margin: 0
-    }
-    body {
-      height: 100vh;
-      width: 100vw;
-    }
-    .test {
-      width: 80%;
-      height: 200px;
-      overflow: auto;
-      border: 1px solid cyan;
-      background-color: #000;
-      scrollbar-color: #404040 black;
-      scrollbar-width: thin;
-    }
-/*     .test::-webkit-scrollbar {
-      width: 3px;
-    }
-    .test::-webkit-scrollbar-thumb {
-      background-color: #404040;
-    }
-    .test::-webkit-scrollbar-track {
-      background-color: black;
-    } */
-    .normal {
-      width: 80%;
-      height: 200px;
-      overflow: auto;
-      margin-top: 36px;
-      border: 1px solid cyan;
-     
-    }
-    .inner {
-      height: 800px;
-    }
-    .text {
-      height: 200px;
-      text-align: center;
-      color: red;
-    }
-  </style>
-</head>
-<body>
-  <div class="test">
-    <div class="inner">
-      <div class="text">line 1</div>
-      <div class="text">line 1</div>
-      <div class="text">line 1</div>
-      <div class="text">line 1</div>
-      <div class="text">line 1</div>
-      <div class="text">line 1</div>
-    </div>
-  </div>
-  <div class="normal">
-    <div class="inner">
-      <div class="text">line 1</div>
-      <div class="text">line 1</div>
-      <div class="text">line 1</div>
-      <div class="text">line 1</div>
-      <div class="text">line 1</div>
-      <div class="text">line 1</div>
-    </div>
-  </div>
-  <div >
-    <h6>INFO</h6>
-    <p class="info"></p>
-  </div>
-  <script>
-   const info = document.querySelector('.info')
-   info.textContent = navigator.userAgent
-  </script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web share test</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <h1>Sharing MDN</h1>
+
+    <p>We love MDN, and want to share it as far as we can! Click the following button to share MDN's home page using your system's native share functionality. See the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share#Browser_compatibility">browsers this currently works on</a>.</p>
+
+    <p><button>Share MDN!</button></p>
+
+    <p class="result"></p>
+
+    <script>
+      let shareData = {
+        title: 'MDN',
+        text: 'Learn web development on MDN!',
+        url: 'https://developer.mozilla.org',
+      };
+
+      const btn = document.querySelector('button');
+      const resultPara = document.querySelector('.result');
+
+      btn.addEventListener('click', () => {
+        if (!navigator.canShare) {
+          resultPara.textContent = 'Web Share API not available';
+          return;
+        }
+        if (!navigator.canShare(shareData)) {
+          resultPara.textContent = 'Share data unsupported, disallowed, or invalid';
+          return;
+        }
+        navigator.share(shareData)
+          .then(() =>
+            resultPara.textContent = 'MDN shared successfully'
+          )
+          .catch((e) =>
+            resultPara.textContent = 'Error: ' + e
+          ).finally(() => {
+            resultPara.textContent = resultPara.textContent + ' (this is a test)';
+          })
+      });
+    </script>
+  </body>
 </html>
